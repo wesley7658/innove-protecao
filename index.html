@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Innove Proteção Veicular</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+    }
+
+    header {
+        background: #0f7a3b;
+        color: white;
+        text-align: center;
+        padding: 20px;
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 28px;
+    }
+
+    .promo {
+        background: #ffffff;
+        color: #0f7a3b;
+        text-align: center;
+        padding: 15px;
+        font-weight: bold;
+        font-size: 18px;
+        border-bottom: 3px solid #0f7a3b;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 20px auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    label {
+        font-weight: bold;
+        margin-top: 10px;
+        display: block;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    button {
+        margin-top: 20px;
+        width: 100%;
+        padding: 12px;
+        background: #0f7a3b;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #0c5e2d;
+    }
+
+    .indicacao-box {
+        display: none;
+        margin-top: 10px;
+        padding: 10px;
+        background: #e8f5e9;
+        border-radius: 5px;
+    }
+
+    footer {
+        text-align: center;
+        padding: 15px;
+        background: #0f7a3b;
+        color: white;
+        margin-top: 30px;
+        font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+        .container {
+            margin: 10px;
+            padding: 15px;
+        }
+
+        header h1 {
+            font-size: 22px;
+        }
+    }
+</style>
+
+<script>
+function mostrarIndicacao() {
+    var resposta = document.getElementById("indicacao").value;
+    var box = document.getElementById("indicacaoBox");
+
+    if (resposta === "sim") {
+        box.style.display = "block";
+    } else {
+        box.style.display = "none";
+    }
+}
+
+function enviarWhatsApp(event) {
+    event.preventDefault();
+
+    var nome = document.getElementById("nome").value;
+    var placa = document.getElementById("placa").value;
+    var tipo = document.getElementById("tipo").value;
+    var modelo = document.getElementById("modelo").value;
+    var email = document.getElementById("email").value;
+    var indicacao = document.getElementById("indicacao").value;
+
+    var mensagem = "📋 Nova Solicitação - Innove Proteção Veicular%0A%0A";
+    mensagem += "👤 Nome: " + nome + "%0A";
+    mensagem += "🚗 Placa: " + placa + "%0A";
+    mensagem += "🔹 Tipo: " + tipo + "%0A";
+    mensagem += "📌 Modelo: " + modelo + "%0A";
+    mensagem += "📧 Email: " + email + "%0A";
+    mensagem += "📣 Foi indicação? " + indicacao + "%0A";
+
+    if (indicacao === "sim") {
+        var nomeInd = document.getElementById("nomeIndicou").value;
+        var telInd = document.getElementById("telIndicou").value;
+
+        mensagem += "%0A💰 Indicação Confirmada%0A";
+        mensagem += "👤 Nome de quem indicou: " + nomeInd + "%0A";
+        mensagem += "📱 Telefone: " + telInd + "%0A";
+        mensagem += "💵 Ganha R$50 no PIX na hora!";
+    }
+
+    var telefone = "5531989660213";
+    var url = "https://wa.me/" + telefone + "?text=" + mensagem;
+
+    window.open(url, "_blank");
+}
+</script>
+
+</head>
+<body>
+
+<header>
+    <h1>INNOVE PROTEÇÃO VEICULAR</h1>
+</header>
+
+<div class="promo">
+    🎉 PROMOÇÃO ESPECIAL! Adesão por apenas <strong>R$ 99,00</strong> 🎉
+</div>
+
+<div class="container">
+    <form onsubmit="enviarWhatsApp(event)">
+
+        <label>Nome Completo</label>
+        <input type="text" id="nome" required>
+
+        <label>Placa do Veículo</label>
+        <input type="text" id="placa" required>
+
+        <label>Tipo de Veículo</label>
+        <select id="tipo" required>
+            <option value="">Selecione</option>
+            <option>Carro</option>
+            <option>Moto</option>
+        </select>
+
+        <label>Modelo do Veículo</label>
+        <input type="text" id="modelo" required>
+
+        <label>Email</label>
+        <input type="email" id="email" required>
+
+        <label>Foi indicação?</label>
+        <select id="indicacao" onchange="mostrarIndicacao()" required>
+            <option value="">Selecione</option>
+            <option value="sim">Sim</option>
+            <option value="nao">Não</option>
+        </select>
+
+        <div class="indicacao-box" id="indicacaoBox">
+            <p><strong>💰 Quem indicou ganha R$ 50 no PIX na hora!</strong></p>
+
+            <label>Nome de quem indicou</label>
+            <input type="text" id="nomeIndicou">
+
+            <label>Telefone de quem indicou</label>
+            <input type="tel" id="telIndicou">
+        </div>
+
+        <button type="submit">Quero Aproveitar a Promoção</button>
+    </form>
+</div>
+
+<footer>
+    © 2026 Innove Proteção Veicular - Todos os direitos reservados <br>
+    Desenvolvido por Wesley D´Agostini
+</footer>
+
+</body>
+</html>
